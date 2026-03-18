@@ -643,38 +643,38 @@ Nord-Pas-de-Calais
 </table>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" tabindex="-1"></a><span class="co"># Statistiques descriptives</span></span>
 <span id="cb7-2"><a href="index.html#cb7-2" tabindex="-1"></a><span class="fu">summary</span>(donnees)</span></code></pre></div>
-<pre><code>##      IDpol           ClaimNb          Exposure           VehPower     
-##  1      :     1   Min.   : 0.000   Min.   :0.002732   Min.   : 4.000  
-##  3      :     1   1st Qu.: 0.000   1st Qu.:0.180000   1st Qu.: 5.000  
-##  5      :     1   Median : 0.000   Median :0.490000   Median : 6.000  
-##  10     :     1   Mean   : 0.039   Mean   :0.528743   Mean   : 6.455  
-##  11     :     1   3rd Qu.: 0.000   3rd Qu.:0.990000   3rd Qu.: 7.000  
-##  13     :     1   Max.   :16.000   Max.   :2.010000   Max.   :15.000  
-##  (Other):677985                                                       
-##      VehAge           DrivAge        BonusMalus        VehBrand     
-##  Min.   :  0.000   Min.   : 18.0   Min.   : 50.00   B12    :166022  
-##  1st Qu.:  2.000   1st Qu.: 34.0   1st Qu.: 50.00   B1     :162730  
-##  Median :  6.000   Median : 44.0   Median : 50.00   B2     :159854  
-##  Mean   :  7.044   Mean   : 45.5   Mean   : 59.76   B3     : 53393  
-##  3rd Qu.: 11.000   3rd Qu.: 55.0   3rd Qu.: 64.00   B5     : 34752  
-##  Max.   :100.000   Max.   :100.0   Max.   :230.00   B6     : 28545  
-##                                                     (Other): 72695  
-##      VehGas       Area          Density     
-##  Diesel :332128   A:103952   Min.   :    1  
-##  Regular:345863   B: 75457   1st Qu.:   92  
-##                   C:191874   Median :  393  
-##                   D:151592   Mean   : 1792  
-##                   E:137163   3rd Qu.: 1658  
-##                   F: 17953   Max.   :27000  
-##                                             
-##                          Region      
-##  Centre                     :160595  
-##  Rhone-Alpes                : 84748  
-##  Provence-Alpes-Cotes-D&#39;Azur: 79315  
-##  Ile-de-France              : 69789  
-##  Bretagne                   : 42120  
-##  Pays-de-la-Loire           : 38747  
-##  (Other)                    :202677</code></pre>
+<pre><code>     IDpol           ClaimNb          Exposure           VehPower     
+ 1      :     1   Min.   : 0.000   Min.   :0.002732   Min.   : 4.000  
+ 3      :     1   1st Qu.: 0.000   1st Qu.:0.180000   1st Qu.: 5.000  
+ 5      :     1   Median : 0.000   Median :0.490000   Median : 6.000  
+ 10     :     1   Mean   : 0.039   Mean   :0.528743   Mean   : 6.455  
+ 11     :     1   3rd Qu.: 0.000   3rd Qu.:0.990000   3rd Qu.: 7.000  
+ 13     :     1   Max.   :16.000   Max.   :2.010000   Max.   :15.000  
+ (Other):677985                                                       
+     VehAge           DrivAge        BonusMalus        VehBrand     
+ Min.   :  0.000   Min.   : 18.0   Min.   : 50.00   B12    :166022  
+ 1st Qu.:  2.000   1st Qu.: 34.0   1st Qu.: 50.00   B1     :162730  
+ Median :  6.000   Median : 44.0   Median : 50.00   B2     :159854  
+ Mean   :  7.044   Mean   : 45.5   Mean   : 59.76   B3     : 53393  
+ 3rd Qu.: 11.000   3rd Qu.: 55.0   3rd Qu.: 64.00   B5     : 34752  
+ Max.   :100.000   Max.   :100.0   Max.   :230.00   B6     : 28545  
+                                                    (Other): 72695  
+     VehGas       Area          Density     
+ Diesel :332128   A:103952   Min.   :    1  
+ Regular:345863   B: 75457   1st Qu.:   92  
+                  C:191874   Median :  393  
+                  D:151592   Mean   : 1792  
+                  E:137163   3rd Qu.: 1658  
+                  F: 17953   Max.   :27000  
+                                            
+                         Region      
+ Centre                     :160595  
+ Rhone-Alpes                : 84748  
+ Provence-Alpes-Cotes-D&#39;Azur: 79315  
+ Ile-de-France              : 69789  
+ Bretagne                   : 42120  
+ Pays-de-la-Loire           : 38747  
+ (Other)                    :202677  </code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1" tabindex="-1"></a><span class="co"># Distribution de la variable cible (frequence des sinistres)</span></span>
 <span id="cb9-2"><a href="index.html#cb9-2" tabindex="-1"></a>donnees <span class="sc">%&gt;%</span></span>
 <span id="cb9-3"><a href="index.html#cb9-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ClaimNb)) <span class="sc">+</span></span>
@@ -685,12 +685,12 @@ Nord-Pas-de-Calais
 <p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
 <p>Le jeu de données contient les variables suivantes :</p>
 <ul>
-<li><p><code>PolicyID</code> : identifiant unique du contrat</p></li>
+<li><p><code>IDpol</code> : identifiant unique du contrat</p></li>
 <li><p><code>ClaimNb</code> : nombre de sinistres sur la période (variable cible)</p></li>
 <li><p><code>Exposure</code> : durée d’exposition au risque (en années)</p></li>
-<li><p><code>Power</code> : puissance fiscale du véhicule (catégorielle)</p></li>
-<li><p><code>CarAge</code> : âge du véhicule (en années)</p></li>
-<li><p><code>DriverAge</code> : âge du conducteur principal</p></li>
+<li><p><code>VehPower</code> : puissance fiscale du véhicule (catégorielle)</p></li>
+<li><p><code>VehAge</code> : âge du véhicule (en années)</p></li>
+<li><p><code>DrivAge</code> : âge du conducteur principal</p></li>
 <li><p><code>Density</code> : densité de population dans la commune (habitants/km²)</p></li>
 <li><p><code>Region</code> : région (code)</p></li>
 <li><p><code>BonusMalus</code> : coefficient bonus-malus</p></li>
@@ -703,9 +703,129 @@ Nord-Pas-de-Calais
 <p>Notre objectif est de construire un modèle de tarification pour prédire la fréquence des sinistres. En actuariat, on modélise classiquement le nombre de sinistres <span class="math inline">\(Y_i\)</span> par une loi de Poisson de paramètre <span class="math inline">\(\lambda_i \times \text{exposition}_i\)</span>, où <span class="math inline">\(\lambda_i\)</span> est le taux de sinistres attendu. Le lien canonique est le logarithme :</p>
 <p><span class="math display">\[
 \log(\lambda_i)=\beta_0+\beta_1 X_{1i}+\beta_2X_{2i}+\ldots+\beta_pX_{pi}
-\]</span>
-#### Préparation des données et split entraînement/test {-}</p>
+\]</span></p>
+</div>
+<div id="préparation-des-données-et-split-entraînementtest" class="section level4 unnumbered hasAnchor">
+<h4>Préparation des données et split entraînement/test<a href="#pr%C3%A9paration-des-donn%C3%A9es-et-split-entra%C3%AEnementtest" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>La première étape consiste à diviser nos données en un ensemble d’entraînement (80%) et un ensemble de test (20%). Cette séparation est cruciale pour évaluer la capacité de généralisation de notre modèle.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="index.html#cb10-1" tabindex="-1"></a><span class="co"># Fixer une graine pour la reproductibilite</span></span>
+<span id="cb10-2"><a href="index.html#cb10-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb10-3"><a href="index.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="index.html#cb10-4" tabindex="-1"></a><span class="co"># Split entraînement/test</span></span>
+<span id="cb10-5"><a href="index.html#cb10-5" tabindex="-1"></a>split_data <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(donnees, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb10-6"><a href="index.html#cb10-6" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(split_data)</span>
+<span id="cb10-7"><a href="index.html#cb10-7" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(split_data)</span>
+<span id="cb10-8"><a href="index.html#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="index.html#cb10-9" tabindex="-1"></a><span class="co"># Verification des proportions</span></span>
+<span id="cb10-10"><a href="index.html#cb10-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Taille de l&#39;ensemble d&#39;entraînement :&quot;</span>, <span class="fu">nrow</span>(train_data), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Taille de l&#39;ensemble d&#39;entraînement : 542392 </code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="index.html#cb12-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Taille de l&#39;ensemble de test :&quot;</span>, <span class="fu">nrow</span>(test_data))</span></code></pre></div>
+<pre><code>Taille de l&#39;ensemble de test : 135599</code></pre>
+</div>
+<div id="création-dune-recette-de-prétraitement" class="section level4 unnumbered hasAnchor">
+<h4>Création d’une recette de prétraitement<a href="#cr%C3%A9ation-dune-recette-de-pr%C3%A9traitement" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Les <code>recipes</code> de <code>tidymodels</code> permettent de définir une séquence d’opérations de prétraitement qui seront appliquées de manière cohérente à tous les jeux de données.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="index.html#cb14-1" tabindex="-1"></a><span class="co"># Definition de la recette</span></span>
+<span id="cb14-2"><a href="index.html#cb14-2" tabindex="-1"></a>recette_glm <span class="ot">&lt;-</span> <span class="fu">recipe</span>(ClaimNb <span class="sc">~</span> VehPower <span class="sc">+</span> VehAge <span class="sc">+</span> DrivAge <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="index.html#cb14-3" tabindex="-1"></a>                    Density <span class="sc">+</span> Region <span class="sc">+</span> BonusMalus <span class="sc">+</span> Exposure,</span>
+<span id="cb14-4"><a href="index.html#cb14-4" tabindex="-1"></a>                    <span class="at">data =</span> train_data) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="index.html#cb14-5" tabindex="-1"></a>  <span class="co"># Variable d&#39;exposition (offset dans le modele)</span></span>
+<span id="cb14-6"><a href="index.html#cb14-6" tabindex="-1"></a>  <span class="fu">update_role</span>(Exposure, <span class="at">new_role =</span> <span class="st">&quot;offset&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="index.html#cb14-7" tabindex="-1"></a>  <span class="co"># Encodage des variables categorielle</span></span>
+<span id="cb14-8"><a href="index.html#cb14-8" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="index.html#cb14-9" tabindex="-1"></a>  <span class="co"># Suppression des variables a variance nulle</span></span>
+<span id="cb14-10"><a href="index.html#cb14-10" tabindex="-1"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11"><a href="index.html#cb14-11" tabindex="-1"></a>  <span class="co"># Normalisation des variables numeriques</span></span>
+<span id="cb14-12"><a href="index.html#cb14-12" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-13"><a href="index.html#cb14-13" tabindex="-1"></a>  <span class="co"># Gestion des valeurs manquantes (si presentes)</span></span>
+<span id="cb14-14"><a href="index.html#cb14-14" tabindex="-1"></a>  <span class="fu">step_impute_mean</span>(<span class="fu">all_numeric_predictors</span>())</span>
+<span id="cb14-15"><a href="index.html#cb14-15" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="index.html#cb14-16" tabindex="-1"></a><span class="co"># Visualisation de la recette</span></span>
+<span id="cb14-17"><a href="index.html#cb14-17" tabindex="-1"></a>recette_glm</span></code></pre></div>
+<pre><code></code></pre>
+<pre><code>-- Recipe ----------------------------------------------------------------------</code></pre>
+<pre><code></code></pre>
+<pre><code>-- Inputs </code></pre>
+<pre><code>Number of variables by role</code></pre>
+<pre><code>outcome:   1
+predictor: 6
+offset:    1</code></pre>
+<pre><code></code></pre>
+<pre><code>-- Operations </code></pre>
+<pre><code>* Dummy variables from: all_nominal_predictors()</code></pre>
+<pre><code>* Zero variance filter on: all_predictors()</code></pre>
+<pre><code>* Centering and scaling for: all_numeric_predictors()</code></pre>
+<pre><code>* Mean imputation for: all_numeric_predictors()</code></pre>
+</div>
+<div id="spécification-du-modèle-lasso" class="section level4 unnumbered hasAnchor">
+<h4>Spécification du modèle Lasso<a href="#sp%C3%A9cification-du-mod%C3%A8le-lasso" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Nous utilisons un modèle de régression de Poisson avec pénalité Lasso (régularisation <span class="math inline">\(L1\)</span>). Le paramètre de pénalité <code>penalty</code> sera optimisé par validation croisée.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="index.html#cb27-1" tabindex="-1"></a><span class="co"># Specification du modele</span></span>
+<span id="cb27-2"><a href="index.html#cb27-2" tabindex="-1"></a>modele_lasso <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>(<span class="at">penalty =</span> <span class="fu">tune</span>(), <span class="at">mixture =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="index.html#cb27-3" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;glmnet&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="index.html#cb27-4" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">&quot;regression&quot;</span>)</span>
+<span id="cb27-5"><a href="index.html#cb27-5" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="index.html#cb27-6" tabindex="-1"></a><span class="co"># Note: mixture = 1 correspond au Lasso (L1)</span></span>
+<span id="cb27-7"><a href="index.html#cb27-7" tabindex="-1"></a><span class="co"># mixture = 0 correspond a la Ridge (L2)</span></span>
+<span id="cb27-8"><a href="index.html#cb27-8" tabindex="-1"></a><span class="co"># Entre 0 et 1 correspond a ElasticNet</span></span></code></pre></div>
+</div>
+<div id="création-du-workflow" class="section level4 unnumbered hasAnchor">
+<h4>Création du workflow<a href="#cr%C3%A9ation-du-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le <code>workflow</code> assemble la recette et le modèle en un seul objet.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="index.html#cb28-1" tabindex="-1"></a><span class="co"># Creation du workflow</span></span>
+<span id="cb28-2"><a href="index.html#cb28-2" tabindex="-1"></a>workflow_lasso <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="index.html#cb28-3" tabindex="-1"></a>  <span class="fu">add_recipe</span>(recette_glm) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="index.html#cb28-4" tabindex="-1"></a>  <span class="fu">add_model</span>(modele_lasso)</span>
+<span id="cb28-5"><a href="index.html#cb28-5" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="index.html#cb28-6" tabindex="-1"></a>workflow_lasso</span></code></pre></div>
+<pre><code>== Workflow ====================================================================
+Preprocessor: Recipe
+Model: linear_reg()
+
+-- Preprocessor ----------------------------------------------------------------
+4 Recipe Steps
+
+* step_dummy()
+* step_zv()
+* step_normalize()
+* step_impute_mean()
+
+-- Model -----------------------------------------------------------------------
+Linear Regression Model Specification (regression)
+
+Main Arguments:
+  penalty = tune()
+  mixture = 1
+
+Computational engine: glmnet </code></pre>
+</div>
+<div id="validation-croisée-pour-le-tuning" class="section level4 unnumbered hasAnchor">
+<h4>Validation croisée pour le tuning<a href="#validation-crois%C3%A9e-pour-le-tuning" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Nous utilisons une validation croisée à 10 plis (10-folds) pour trouver la valeur optimale du paramètre de pénalité.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="index.html#cb30-1" tabindex="-1"></a><span class="co"># Creation des plis de validation croisee</span></span>
+<span id="cb30-2"><a href="index.html#cb30-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb30-3"><a href="index.html#cb30-3" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_data, <span class="at">v =</span> <span class="dv">10</span>)</span>
+<span id="cb30-4"><a href="index.html#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="index.html#cb30-5" tabindex="-1"></a><span class="co"># Definition de la grille de parametres</span></span>
+<span id="cb30-6"><a href="index.html#cb30-6" tabindex="-1"></a>grid_penalty <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">penalty</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>)), <span class="at">levels =</span> <span class="dv">20</span>)</span>
+<span id="cb30-7"><a href="index.html#cb30-7" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="index.html#cb30-8" tabindex="-1"></a><span class="co"># Entrainement avec tuning</span></span>
+<span id="cb30-9"><a href="index.html#cb30-9" tabindex="-1"></a>resultats_tuning <span class="ot">&lt;-</span> workflow_lasso <span class="sc">%&gt;%</span></span>
+<span id="cb30-10"><a href="index.html#cb30-10" tabindex="-1"></a>  <span class="fu">tune_grid</span>(</span>
+<span id="cb30-11"><a href="index.html#cb30-11" tabindex="-1"></a>    <span class="at">resamples =</span> folds,</span>
+<span id="cb30-12"><a href="index.html#cb30-12" tabindex="-1"></a>    <span class="at">grid =</span> grid_penalty,</span>
+<span id="cb30-13"><a href="index.html#cb30-13" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse, mae)</span>
+<span id="cb30-14"><a href="index.html#cb30-14" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="index.html#cb31-1" tabindex="-1"></a><span class="co"># Visualisation des resultats</span></span>
+<span id="cb31-2"><a href="index.html#cb31-2" tabindex="-1"></a><span class="fu">autoplot</span>(resultats_tuning)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="index.html#cb32-1" tabindex="-1"></a><span class="co"># Meilleur parametre</span></span>
+<span id="cb32-2"><a href="index.html#cb32-2" tabindex="-1"></a>meilleur_penalty <span class="ot">&lt;-</span> <span class="fu">select_best</span>(resultats_tuning, <span class="at">metric =</span> <span class="st">&quot;rmse&quot;</span>)</span>
+<span id="cb32-3"><a href="index.html#cb32-3" tabindex="-1"></a>meilleur_penalty</span></code></pre></div>
+<pre><code># A tibble: 1 x 2
+  penalty .config         
+    &lt;dbl&gt; &lt;chr&gt;           
+1   0.001 pre0_mod01_post0</code></pre>
 
 </div>
 </div>

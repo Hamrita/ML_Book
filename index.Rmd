@@ -1,4 +1,4 @@
---- 
+---
 title: "Machine Learning appliqué à l'actuariat"
 author: "Mohamed Essaied Hamrita"
 date: "`r Sys.Date()`"
@@ -10,6 +10,8 @@ bibliography: [book.bib, packages.bib]
 description: |
   Ce cours introduit les fondements du machine learning appliqué aux problématiques actuarielles. Il analyse l'évolution du métier d'actuaire face à la transformation numérique du secteur de l'assurance, expose les limites des approches statistiques classiques, et présente la taxonomie des méthodes d'apprentissage automatique. Des exemples concrets tirés de la pratique actuarielle illustrent chaque concept.
 link-citations: yes
+urlcolor: blue
+linkcolor: blue
 github-repo: rstudio/bookdown-demo
 lang: fr
 ---
@@ -32,7 +34,7 @@ Cette approche traditionnelle reposait sur une hypothèse fondamentale : la réa
 
 Trois évolutions majeures ont profondément transformé le paysage de l'assurance et, avec lui, la pratique du métier d'actuaire.
 
-L'explosion du volume et de la variété des données disponibles constitue sans doute la rupture la plus significative. Comme le soulignent @henckaerts2021boosting, les actuaires ont désormais accès à des sources de données d'une richesse sans précédent. Les données télématiques, issues des boîtiers connectés installés dans les véhicules, renseignent avec une précision fine sur les comportements de conduite. Les objets connectés, tels que les montres ou les capteurs domestiques, livrent des informations sur les habitudes de vie des assurés. Les données géolocalisées atteignent une finesse inédite, permettant d'affiner l'évaluation des risques catastrophiques. Les réseaux sociaux, bien que leur utilisation reste encadrée, offrent des perspectives comportementales nouvelles. 
+L'explosion du volume et de la variété des données disponibles constitue sans doute la rupture la plus significative. Comme le soulignent @henckaerts2021boosting, les actuaires ont désormais accès à des sources de données d'une richesse sans précédent. Les données télématiques, issues des boîtiers connectés installés dans les véhicules, renseignent avec une précision fine sur les comportements de conduite. Les objets connectés, tels que les montres ou les capteurs domestiques, livrent des informations sur les habitudes de vie des assurés. Les données géolocalisées atteignent une finesse inédite, permettant d'affiner l'évaluation des risques catastrophiques. Les réseaux sociaux, bien que leur utilisation reste encadrée, offrent des perspectives comportementales nouvelles.
 
 Parallèlement, les attentes réglementaires et concurrentielles se sont considérablement durcies. Solvabilité II exige une connaissance toujours plus fine des risques et une évaluation prospective de la solvabilité. IFRS 17 impose une évaluation plus précise des passifs d'assurance, nécessitant des modèles de plus en plus sophistiqués. La concurrence des insurtechs, qui proposent des offres ultra-personnalisées et des expériences client innovantes, a redéfini les standards du marché. Les assureurs traditionnels doivent désormais faire preuve d'une réactivité accrue, avec des modèles fréquemment mis à jour pour s'adapter à l'évolution des risques et des comportements.
 
@@ -60,13 +62,13 @@ La première limite réside dans l'hypothèse de linéarité du prédicteur. For
 g(\mathbb{E}[Y|X]) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p
 \end{equation}
 
-où \(g\) est la fonction de lien. Cette spécification impose que l'effet de chaque variable soit additif et linéaire à l'échelle de la fonction de lien choisie. Or la réalité assurantielle est rarement aussi simple. L'effet de l'âge sur le risque automobile n'est pas linéaire, comme en témoigne la forme en U de la courbe des sinistralités : les jeunes conducteurs présentent une sinistralité élevée qui décroît avec l'expérience, avant de remonter légèrement chez les seniors. Des interactions complexes existent entre variables, par exemple entre l'âge du conducteur et la puissance du véhicule. Un jeune conducteur au volant d'une voiture puissante présente un risque bien supérieur à la somme des risques individuels, phénomène que @henckaerts2021boosting qualifient de synergie de risque. Des effets de seuil peuvent apparaître, comme un changement brutal de comportement à partir d'un certain kilométrage annuel, que la linéarité du prédicteur ne peut capturer.
+où $g$ est la fonction de lien. Cette spécification impose que l'effet de chaque variable soit additif et linéaire à l'échelle de la fonction de lien choisie. Or la réalité assurantielle est rarement aussi simple. L'effet de l'âge sur le risque automobile n'est pas linéaire, comme en témoigne la forme en U de la courbe des sinistralités : les jeunes conducteurs présentent une sinistralité élevée qui décroît avec l'expérience, avant de remonter légèrement chez les seniors. Des interactions complexes existent entre variables, par exemple entre l'âge du conducteur et la puissance du véhicule. Un jeune conducteur au volant d'une voiture puissante présente un risque bien supérieur à la somme des risques individuels, phénomène que @henckaerts2021boosting qualifient de synergie de risque. Des effets de seuil peuvent apparaître, comme un changement brutal de comportement à partir d'un certain kilométrage annuel, que la linéarité du prédicteur ne peut capturer.
 
 La deuxième limite tient à la nécessité de spécifier manuellement les interactions. Dans un GLM, toute interaction entre variables doit être explicitement écrite dans la formule du modèle :
 
-````{verbatim}
+```{verbatim}
 glm(frequence ~ age + puissance + age:puissance, family = poisson)
-````
+```
 
 Cette spécification oblige l'actuaire à deviner quelles interactions sont pertinentes, une tâche qui devient rapidement impossible lorsque le nombre de variables augmente. Le nombre d'interactions potentielles croît en effet de manière quadratique avec la dimension du problème : avec $p$ variables, il existe $p(p-1)/2$ interactions d'ordre deux, sans même considérer les ordres supérieurs.
 
@@ -90,7 +92,7 @@ Les variables à haute cardinalité peuvent être traitées via des techniques d
 
 Cette puissance accrue s'accompagne cependant d'un risque majeur, celui du surapprentissage ou overfitting, qui constitue la contrepartie naturelle de la flexibilité des modèles. @hastie2009elements formalisent ce risque à travers le compromis biais-variance, concept fondamental pour comprendre les enjeux de la modélisation prédictive.
 
-L'exemple classique en assurance est celui de la tarification au code postal. Si l'on calcule le taux de sinistres pour chaque commune en divisant le nombre de sinistres observés par le nombre d'assurés, on obtiendra des taux extrêmement variables, avec des valeurs très élevées ou très faibles pour les communes comptant peu d'observations. Ces estimations sont non biaisées mais extrêmement volatiles : elles reflètent autant le bruit que le signal. Mathématiquement, pour une commune \(j\) avec \(n_j\) assurés et $S_j$ sinistres, l'estimateur $\hat{\lambda}_j = S_j/n_j$ a pour variance $\lambda_j/n_j$, qui peut être très élevée si $n_j$ est petit.
+L'exemple classique en assurance est celui de la tarification au code postal. Si l'on calcule le taux de sinistres pour chaque commune en divisant le nombre de sinistres observés par le nombre d'assurés, on obtiendra des taux extrêmement variables, avec des valeurs très élevées ou très faibles pour les communes comptant peu d'observations. Ces estimations sont non biaisées mais extrêmement volatiles : elles reflètent autant le bruit que le signal. Mathématiquement, pour une commune $j$ avec $n_j$ assurés et $S_j$ sinistres, l'estimateur $\hat{\lambda}_j = S_j/n_j$ a pour variance $\lambda_j/n_j$, qui peut être très élevée si $n_j$ est petit.
 
 À l'inverse, une moyenne nationale unique $\hat{\lambda} = \sum_j S_j / \sum_j n_j$ serait très stable (variance faible) mais fortement biaisée car elle ignore les spécificités locales. Le défi du machine learning est de trouver le bon équilibre entre ces deux extrêmes, et les outils de régularisation et de validation croisée permettent précisément d'ajuster ce compromis de manière optimale.
 
@@ -124,7 +126,7 @@ L'apprentissage par renforcement constitue une troisième famille, moins directe
 
 Avant de commencer toute analyse, nous devons configurer notre environnement `R` et installer les librairies nécessaires. L'écosystème `tidymodels` @khun2022tidy fournit un cadre cohérent pour toutes les étapes d'un projet de machine learning.
 
-````{verbatim}
+```{verbatim}
 # Installation des librairies necessaires
 install.packages("tidymodels")             # Meta-package pour la modelisation
 install.packages(c("tidyverse", "dplyr")   # Manipulation et visualisation
@@ -137,7 +139,7 @@ install.packages("xgboost")                # Gradient boosting
 install.packages("keras")                  # Deep learning
 install.packages("recipes")                # Pretraitement des donnees
 install.packages("kableExtra")
-````
+```
 
 ```{r}
 # Chargement des librairies
@@ -152,7 +154,6 @@ library(kableExtra)
 library(ggplot2)
 })
 ```
-
 
 ### Présentation du jeu de données : freMTPL2freq
 
@@ -174,12 +175,12 @@ head(donnees) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
 
-```{r}
+```{r, comment=NA}
 # Statistiques descriptives
 summary(donnees)
 ```
 
-```{r}
+```{r, comment=NA}
 # Distribution de la variable cible (frequence des sinistres)
 donnees %>%
   ggplot(aes(x = ClaimNb)) +
@@ -191,34 +192,133 @@ donnees %>%
 
 Le jeu de données contient les variables suivantes :
 
--  `PolicyID` : identifiant unique du contrat
+-   `IDpol` : identifiant unique du contrat
 
--  `ClaimNb` : nombre de sinistres sur la période (variable cible)
+-   `ClaimNb` : nombre de sinistres sur la période (variable cible)
 
--  `Exposure` : durée d'exposition au risque (en années)
+-   `Exposure` : durée d'exposition au risque (en années)
 
--  `Power` : puissance fiscale du véhicule (catégorielle)
+-   `VehPower` : puissance fiscale du véhicule (catégorielle)
 
--  `CarAge` : âge du véhicule (en années)
+-   `VehAge` : âge du véhicule (en années)
 
--  `DriverAge` : âge du conducteur principal
+-   `DrivAge` : âge du conducteur principal
 
--  `Density` : densité de population dans la commune (habitants/km²)
+-   `Density` : densité de population dans la commune (habitants/km²)
 
--  `Region` : région (code)
+-   `Region` : région (code)
 
--  `BonusMalus` : coefficient bonus-malus
+-   `BonusMalus` : coefficient bonus-malus
 
 ### Application 1 : Tarification Non-Vie avec un GLM régularisé
 
-#### Objectif métier {-}
+#### Objectif métier {.unnumbered}
 
 Notre objectif est de construire un modèle de tarification pour prédire la fréquence des sinistres. En actuariat, on modélise classiquement le nombre de sinistres $Y_i$ par une loi de Poisson de paramètre $\lambda_i \times \text{exposition}_i$, où $\lambda_i$ est le taux de sinistres attendu. Le lien canonique est le logarithme :
 
 $$
 \log(\lambda_i)=\beta_0+\beta_1 X_{1i}+\beta_2X_{2i}+\ldots+\beta_pX_{pi}
 $$
-#### Préparation des données et split entraînement/test {-}
 
-La première étape consiste à diviser nos données en un ensemble d'entraînement (80\%) et un ensemble de test (20\%). Cette séparation est cruciale pour évaluer la capacité de généralisation de notre modèle.
+#### Préparation des données et split entraînement/test {.unnumbered}
+
+La première étape consiste à diviser nos données en un ensemble d'entraînement (80%) et un ensemble de test (20%). Cette séparation est cruciale pour évaluer la capacité de généralisation de notre modèle.
+
+```{r, comment=NA}
+# Fixer une graine pour la reproductibilite
+set.seed(2024)
+
+# Split entraînement/test
+split_data <- initial_split(donnees, prop = 0.8)
+train_data <- training(split_data)
+test_data <- testing(split_data)
+
+# Verification des proportions
+cat("Taille de l'ensemble d'entraînement :", nrow(train_data), "\n")
+cat("Taille de l'ensemble de test :", nrow(test_data))
+```
+
+#### Création d'une recette de prétraitement {-}
+
+Les `recipes` de `tidymodels` permettent de définir une séquence d'opérations de prétraitement qui seront appliquées de manière cohérente à tous les jeux de données.
+
+```{r, comment=NA}
+# Definition de la recette
+recette_glm <- recipe(ClaimNb ~ VehPower + VehAge + DrivAge + 
+                    Density + Region + BonusMalus + Exposure,
+                    data = train_data) %>%
+  # Variable d'exposition (offset dans le modele)
+  update_role(Exposure, new_role = "offset") %>%
+  # Encodage des variables categorielle
+  step_dummy(all_nominal_predictors()) %>%
+  # Suppression des variables a variance nulle
+  step_zv(all_predictors()) %>%
+  # Normalisation des variables numeriques
+  step_normalize(all_numeric_predictors()) %>%
+  # Gestion des valeurs manquantes (si presentes)
+  step_impute_mean(all_numeric_predictors())
+
+# Visualisation de la recette
+recette_glm
+```
+
+#### Spécification du modèle Lasso {-}
+
+Nous utilisons un modèle de régression de Poisson avec pénalité Lasso (régularisation $L1$). Le paramètre de pénalité `penalty` sera optimisé par validation croisée.
+
+```{r, comment=NA}
+# Specification du modele
+modele_lasso <- linear_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet") %>%
+  set_mode("regression")
+
+# Note: mixture = 1 correspond au Lasso (L1)
+# mixture = 0 correspond a la Ridge (L2)
+# Entre 0 et 1 correspond a ElasticNet
+```
+
+#### Création du workflow {-}
+
+Le `workflow` assemble la recette et le modèle en un seul objet.
+
+```{r, comment=NA}
+# Creation du workflow
+workflow_lasso <- workflow() %>%
+  add_recipe(recette_glm) %>%
+  add_model(modele_lasso)
+
+workflow_lasso
+```
+
+#### Validation croisée pour le tuning {-}
+
+Nous utilisons une validation croisée à 10 plis (10-folds) pour trouver la valeur optimale du paramètre de pénalité.
+
+```{r, comment=NA}
+# Creation des plis de validation croisee
+set.seed(2024)
+folds <- vfold_cv(train_data, v = 10)
+
+# Definition de la grille de parametres
+grid_penalty <- grid_regular(penalty(range = c(-3, 0)), levels = 20)
+
+# Entrainement avec tuning
+resultats_tuning <- workflow_lasso %>%
+  tune_grid(
+    resamples = folds,
+    grid = grid_penalty,
+    metrics = metric_set(rmse, mae)
+  )
+```
+
+```{r, comment=NA}
+# Visualisation des resultats
+autoplot(resultats_tuning)
+```
+
+```{r, comment=NA}
+# Meilleur parametre
+meilleur_penalty <- select_best(resultats_tuning, metric = "rmse")
+meilleur_penalty
+```
 

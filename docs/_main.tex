@@ -1,6 +1,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 \documentclass[
   french,
 ]{book}
@@ -116,7 +117,7 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 \usepackage{booktabs}
-\usepackage[a4paper, top=2cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage[a4paper, top=2cm, left=2.5cm, right=2cm, bottom=2.25cm]{geometry}
 \usepackage[utf8]{inputenc}
 %\usepackage[french]{babel}
 
@@ -141,7 +142,11 @@
   pdftitle={Machine Learning appliqué à l'actuariat},
   pdfauthor={Mohamed Essaied Hamrita},
   pdflang={fr},
-  hidelinks,
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
   pdfcreator={LaTeX via pandoc}}
 
 \title{Machine Learning appliqué à l'actuariat}
@@ -169,6 +174,7 @@
 \maketitle
 
 {
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
@@ -218,7 +224,7 @@ La première limite réside dans l'hypothèse de linéarité du prédicteur. For
 g(\mathbb{E}[Y|X]) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p
 \end{equation}
 
-où (g) est la fonction de lien. Cette spécification impose que l'effet de chaque variable soit additif et linéaire à l'échelle de la fonction de lien choisie. Or la réalité assurantielle est rarement aussi simple. L'effet de l'âge sur le risque automobile n'est pas linéaire, comme en témoigne la forme en U de la courbe des sinistralités : les jeunes conducteurs présentent une sinistralité élevée qui décroît avec l'expérience, avant de remonter légèrement chez les seniors. Des interactions complexes existent entre variables, par exemple entre l'âge du conducteur et la puissance du véhicule. Un jeune conducteur au volant d'une voiture puissante présente un risque bien supérieur à la somme des risques individuels, phénomène que \citet{henckaerts2021boosting} qualifient de synergie de risque. Des effets de seuil peuvent apparaître, comme un changement brutal de comportement à partir d'un certain kilométrage annuel, que la linéarité du prédicteur ne peut capturer.
+où \(g\) est la fonction de lien. Cette spécification impose que l'effet de chaque variable soit additif et linéaire à l'échelle de la fonction de lien choisie. Or la réalité assurantielle est rarement aussi simple. L'effet de l'âge sur le risque automobile n'est pas linéaire, comme en témoigne la forme en U de la courbe des sinistralités : les jeunes conducteurs présentent une sinistralité élevée qui décroît avec l'expérience, avant de remonter légèrement chez les seniors. Des interactions complexes existent entre variables, par exemple entre l'âge du conducteur et la puissance du véhicule. Un jeune conducteur au volant d'une voiture puissante présente un risque bien supérieur à la somme des risques individuels, phénomène que \citet{henckaerts2021boosting} qualifient de synergie de risque. Des effets de seuil peuvent apparaître, comme un changement brutal de comportement à partir d'un certain kilométrage annuel, que la linéarité du prédicteur ne peut capturer.
 
 La deuxième limite tient à la nécessité de spécifier manuellement les interactions. Dans un GLM, toute interaction entre variables doit être explicitement écrite dans la formule du modèle :
 
@@ -250,7 +256,7 @@ Les variables à haute cardinalité peuvent être traitées via des techniques d
 
 Cette puissance accrue s'accompagne cependant d'un risque majeur, celui du surapprentissage ou overfitting, qui constitue la contrepartie naturelle de la flexibilité des modèles. \citet{hastie2009elements} formalisent ce risque à travers le compromis biais-variance, concept fondamental pour comprendre les enjeux de la modélisation prédictive.
 
-L'exemple classique en assurance est celui de la tarification au code postal. Si l'on calcule le taux de sinistres pour chaque commune en divisant le nombre de sinistres observés par le nombre d'assurés, on obtiendra des taux extrêmement variables, avec des valeurs très élevées ou très faibles pour les communes comptant peu d'observations. Ces estimations sont non biaisées mais extrêmement volatiles : elles reflètent autant le bruit que le signal. Mathématiquement, pour une commune (j) avec (n\_j) assurés et \(S_j\) sinistres, l'estimateur \(\hat{\lambda}_j = S_j/n_j\) a pour variance \(\lambda_j/n_j\), qui peut être très élevée si \(n_j\) est petit.
+L'exemple classique en assurance est celui de la tarification au code postal. Si l'on calcule le taux de sinistres pour chaque commune en divisant le nombre de sinistres observés par le nombre d'assurés, on obtiendra des taux extrêmement variables, avec des valeurs très élevées ou très faibles pour les communes comptant peu d'observations. Ces estimations sont non biaisées mais extrêmement volatiles : elles reflètent autant le bruit que le signal. Mathématiquement, pour une commune \(j\) avec \(n_j\) assurés et \(S_j\) sinistres, l'estimateur \(\hat{\lambda}_j = S_j/n_j\) a pour variance \(\lambda_j/n_j\), qui peut être très élevée si \(n_j\) est petit.
 
 À l'inverse, une moyenne nationale unique \(\hat{\lambda} = \sum_j S_j / \sum_j n_j\) serait très stable (variance faible) mais fortement biaisée car elle ignore les spécificités locales. Le défi du machine learning est de trouver le bon équilibre entre ces deux extrêmes, et les outils de régularisation et de validation croisée permettent précisément d'ajuster ce compromis de manière optimale.
 
@@ -386,38 +392,38 @@ IDpol & ClaimNb & Exposure & VehPower & VehAge & DrivAge & BonusMalus & VehBrand
 \end{Shaded}
 
 \begin{verbatim}
-##      IDpol           ClaimNb          Exposure           VehPower     
-##  1      :     1   Min.   : 0.000   Min.   :0.002732   Min.   : 4.000  
-##  3      :     1   1st Qu.: 0.000   1st Qu.:0.180000   1st Qu.: 5.000  
-##  5      :     1   Median : 0.000   Median :0.490000   Median : 6.000  
-##  10     :     1   Mean   : 0.039   Mean   :0.528743   Mean   : 6.455  
-##  11     :     1   3rd Qu.: 0.000   3rd Qu.:0.990000   3rd Qu.: 7.000  
-##  13     :     1   Max.   :16.000   Max.   :2.010000   Max.   :15.000  
-##  (Other):677985                                                       
-##      VehAge           DrivAge        BonusMalus        VehBrand     
-##  Min.   :  0.000   Min.   : 18.0   Min.   : 50.00   B12    :166022  
-##  1st Qu.:  2.000   1st Qu.: 34.0   1st Qu.: 50.00   B1     :162730  
-##  Median :  6.000   Median : 44.0   Median : 50.00   B2     :159854  
-##  Mean   :  7.044   Mean   : 45.5   Mean   : 59.76   B3     : 53393  
-##  3rd Qu.: 11.000   3rd Qu.: 55.0   3rd Qu.: 64.00   B5     : 34752  
-##  Max.   :100.000   Max.   :100.0   Max.   :230.00   B6     : 28545  
-##                                                     (Other): 72695  
-##      VehGas       Area          Density     
-##  Diesel :332128   A:103952   Min.   :    1  
-##  Regular:345863   B: 75457   1st Qu.:   92  
-##                   C:191874   Median :  393  
-##                   D:151592   Mean   : 1792  
-##                   E:137163   3rd Qu.: 1658  
-##                   F: 17953   Max.   :27000  
-##                                             
-##                          Region      
-##  Centre                     :160595  
-##  Rhone-Alpes                : 84748  
-##  Provence-Alpes-Cotes-D'Azur: 79315  
-##  Ile-de-France              : 69789  
-##  Bretagne                   : 42120  
-##  Pays-de-la-Loire           : 38747  
-##  (Other)                    :202677
+     IDpol           ClaimNb          Exposure           VehPower     
+ 1      :     1   Min.   : 0.000   Min.   :0.002732   Min.   : 4.000  
+ 3      :     1   1st Qu.: 0.000   1st Qu.:0.180000   1st Qu.: 5.000  
+ 5      :     1   Median : 0.000   Median :0.490000   Median : 6.000  
+ 10     :     1   Mean   : 0.039   Mean   :0.528743   Mean   : 6.455  
+ 11     :     1   3rd Qu.: 0.000   3rd Qu.:0.990000   3rd Qu.: 7.000  
+ 13     :     1   Max.   :16.000   Max.   :2.010000   Max.   :15.000  
+ (Other):677985                                                       
+     VehAge           DrivAge        BonusMalus        VehBrand     
+ Min.   :  0.000   Min.   : 18.0   Min.   : 50.00   B12    :166022  
+ 1st Qu.:  2.000   1st Qu.: 34.0   1st Qu.: 50.00   B1     :162730  
+ Median :  6.000   Median : 44.0   Median : 50.00   B2     :159854  
+ Mean   :  7.044   Mean   : 45.5   Mean   : 59.76   B3     : 53393  
+ 3rd Qu.: 11.000   3rd Qu.: 55.0   3rd Qu.: 64.00   B5     : 34752  
+ Max.   :100.000   Max.   :100.0   Max.   :230.00   B6     : 28545  
+                                                    (Other): 72695  
+     VehGas       Area          Density     
+ Diesel :332128   A:103952   Min.   :    1  
+ Regular:345863   B: 75457   1st Qu.:   92  
+                  C:191874   Median :  393  
+                  D:151592   Mean   : 1792  
+                  E:137163   3rd Qu.: 1658  
+                  F: 17953   Max.   :27000  
+                                            
+                         Region      
+ Centre                     :160595  
+ Rhone-Alpes                : 84748  
+ Provence-Alpes-Cotes-D'Azur: 79315  
+ Ile-de-France              : 69789  
+ Bretagne                   : 42120  
+ Pays-de-la-Loire           : 38747  
+ (Other)                    :202677  
 \end{verbatim}
 
 \begin{Shaded}
@@ -438,17 +444,17 @@ Le jeu de données contient les variables suivantes :
 
 \begin{itemize}
 \item
-  \texttt{PolicyID} : identifiant unique du contrat
+  \texttt{IDpol} : identifiant unique du contrat
 \item
   \texttt{ClaimNb} : nombre de sinistres sur la période (variable cible)
 \item
   \texttt{Exposure} : durée d'exposition au risque (en années)
 \item
-  \texttt{Power} : puissance fiscale du véhicule (catégorielle)
+  \texttt{VehPower} : puissance fiscale du véhicule (catégorielle)
 \item
-  \texttt{CarAge} : âge du véhicule (en années)
+  \texttt{VehAge} : âge du véhicule (en années)
 \item
-  \texttt{DriverAge} : âge du conducteur principal
+  \texttt{DrivAge} : âge du conducteur principal
 \item
   \texttt{Density} : densité de population dans la commune (habitants/km²)
 \item
@@ -467,9 +473,219 @@ Notre objectif est de construire un modèle de tarification pour prédire la fr�
 \[
 \log(\lambda_i)=\beta_0+\beta_1 X_{1i}+\beta_2X_{2i}+\ldots+\beta_pX_{pi}
 \]
-\#\#\#\# Préparation des données et split entraînement/test \{-\}
+
+\subsubsection*{Préparation des données et split entraînement/test}
+\addcontentsline{toc}{subsubsection}{Préparation des données et split entraînement/test}
 
 La première étape consiste à diviser nos données en un ensemble d'entraînement (80\%) et un ensemble de test (20\%). Cette séparation est cruciale pour évaluer la capacité de généralisation de notre modèle.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fixer une graine pour la reproductibilite}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2024}\NormalTok{)}
+
+\CommentTok{\# Split entraînement/test}
+\NormalTok{split\_data }\OtherTok{\textless{}{-}} \FunctionTok{initial\_split}\NormalTok{(donnees, }\AttributeTok{prop =} \FloatTok{0.8}\NormalTok{)}
+\NormalTok{train\_data }\OtherTok{\textless{}{-}} \FunctionTok{training}\NormalTok{(split\_data)}
+\NormalTok{test\_data }\OtherTok{\textless{}{-}} \FunctionTok{testing}\NormalTok{(split\_data)}
+
+\CommentTok{\# Verification des proportions}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Taille de l\textquotesingle{}ensemble d\textquotesingle{}entraînement :"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(train\_data), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Taille de l'ensemble d'entraînement : 542392 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Taille de l\textquotesingle{}ensemble de test :"}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(test\_data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Taille de l'ensemble de test : 135599
+\end{verbatim}
+
+\subsubsection*{Création d'une recette de prétraitement}
+\addcontentsline{toc}{subsubsection}{Création d'une recette de prétraitement}
+
+Les \texttt{recipes} de \texttt{tidymodels} permettent de définir une séquence d'opérations de prétraitement qui seront appliquées de manière cohérente à tous les jeux de données.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Definition de la recette}
+\NormalTok{recette\_glm }\OtherTok{\textless{}{-}} \FunctionTok{recipe}\NormalTok{(ClaimNb }\SpecialCharTok{\textasciitilde{}}\NormalTok{ VehPower }\SpecialCharTok{+}\NormalTok{ VehAge }\SpecialCharTok{+}\NormalTok{ DrivAge }\SpecialCharTok{+} 
+\NormalTok{                    Density }\SpecialCharTok{+}\NormalTok{ Region }\SpecialCharTok{+}\NormalTok{ BonusMalus }\SpecialCharTok{+}\NormalTok{ Exposure,}
+                    \AttributeTok{data =}\NormalTok{ train\_data) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Variable d\textquotesingle{}exposition (offset dans le modele)}
+  \FunctionTok{update\_role}\NormalTok{(Exposure, }\AttributeTok{new\_role =} \StringTok{"offset"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Encodage des variables categorielle}
+  \FunctionTok{step\_dummy}\NormalTok{(}\FunctionTok{all\_nominal\_predictors}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Suppression des variables a variance nulle}
+  \FunctionTok{step\_zv}\NormalTok{(}\FunctionTok{all\_predictors}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Normalisation des variables numeriques}
+  \FunctionTok{step\_normalize}\NormalTok{(}\FunctionTok{all\_numeric\_predictors}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \CommentTok{\# Gestion des valeurs manquantes (si presentes)}
+  \FunctionTok{step\_impute\_mean}\NormalTok{(}\FunctionTok{all\_numeric\_predictors}\NormalTok{())}
+
+\CommentTok{\# Visualisation de la recette}
+\NormalTok{recette\_glm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+\end{verbatim}
+
+\begin{verbatim}
+-- Recipe ----------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+\end{verbatim}
+
+\begin{verbatim}
+-- Inputs 
+\end{verbatim}
+
+\begin{verbatim}
+Number of variables by role
+\end{verbatim}
+
+\begin{verbatim}
+outcome:   1
+predictor: 6
+offset:    1
+\end{verbatim}
+
+\begin{verbatim}
+\end{verbatim}
+
+\begin{verbatim}
+-- Operations 
+\end{verbatim}
+
+\begin{verbatim}
+* Dummy variables from: all_nominal_predictors()
+\end{verbatim}
+
+\begin{verbatim}
+* Zero variance filter on: all_predictors()
+\end{verbatim}
+
+\begin{verbatim}
+* Centering and scaling for: all_numeric_predictors()
+\end{verbatim}
+
+\begin{verbatim}
+* Mean imputation for: all_numeric_predictors()
+\end{verbatim}
+
+\subsubsection*{Spécification du modèle Lasso}
+\addcontentsline{toc}{subsubsection}{Spécification du modèle Lasso}
+
+Nous utilisons un modèle de régression de Poisson avec pénalité Lasso (régularisation \(L1\)). Le paramètre de pénalité \texttt{penalty} sera optimisé par validation croisée.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Specification du modele}
+\NormalTok{modele\_lasso }\OtherTok{\textless{}{-}} \FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FunctionTok{tune}\NormalTok{(), }\AttributeTok{mixture =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_engine}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+
+\CommentTok{\# Note: mixture = 1 correspond au Lasso (L1)}
+\CommentTok{\# mixture = 0 correspond a la Ridge (L2)}
+\CommentTok{\# Entre 0 et 1 correspond a ElasticNet}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection*{Création du workflow}
+\addcontentsline{toc}{subsubsection}{Création du workflow}
+
+Le \texttt{workflow} assemble la recette et le modèle en un seul objet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creation du workflow}
+\NormalTok{workflow\_lasso }\OtherTok{\textless{}{-}} \FunctionTok{workflow}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_recipe}\NormalTok{(recette\_glm) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_model}\NormalTok{(modele\_lasso)}
+
+\NormalTok{workflow\_lasso}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+== Workflow ====================================================================
+Preprocessor: Recipe
+Model: linear_reg()
+
+-- Preprocessor ----------------------------------------------------------------
+4 Recipe Steps
+
+* step_dummy()
+* step_zv()
+* step_normalize()
+* step_impute_mean()
+
+-- Model -----------------------------------------------------------------------
+Linear Regression Model Specification (regression)
+
+Main Arguments:
+  penalty = tune()
+  mixture = 1
+
+Computational engine: glmnet 
+\end{verbatim}
+
+\subsubsection*{Validation croisée pour le tuning}
+\addcontentsline{toc}{subsubsection}{Validation croisée pour le tuning}
+
+Nous utilisons une validation croisée à 10 plis (10-folds) pour trouver la valeur optimale du paramètre de pénalité.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creation des plis de validation croisee}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2024}\NormalTok{)}
+\NormalTok{folds }\OtherTok{\textless{}{-}} \FunctionTok{vfold\_cv}\NormalTok{(train\_data, }\AttributeTok{v =} \DecValTok{10}\NormalTok{)}
+
+\CommentTok{\# Definition de la grille de parametres}
+\NormalTok{grid\_penalty }\OtherTok{\textless{}{-}} \FunctionTok{grid\_regular}\NormalTok{(}\FunctionTok{penalty}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{)), }\AttributeTok{levels =} \DecValTok{20}\NormalTok{)}
+
+\CommentTok{\# Entrainement avec tuning}
+\NormalTok{resultats\_tuning }\OtherTok{\textless{}{-}}\NormalTok{ workflow\_lasso }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tune\_grid}\NormalTok{(}
+    \AttributeTok{resamples =}\NormalTok{ folds,}
+    \AttributeTok{grid =}\NormalTok{ grid\_penalty,}
+    \AttributeTok{metrics =} \FunctionTok{metric\_set}\NormalTok{(rmse, mae)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualisation des resultats}
+\FunctionTok{autoplot}\NormalTok{(resultats\_tuning)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/figure-latex/unnamed-chunk-13-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Meilleur parametre}
+\NormalTok{meilleur\_penalty }\OtherTok{\textless{}{-}} \FunctionTok{select\_best}\NormalTok{(resultats\_tuning, }\AttributeTok{metric =} \StringTok{"rmse"}\NormalTok{)}
+\NormalTok{meilleur\_penalty}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 2
+  penalty .config         
+    <dbl> <chr>           
+1   0.001 pre0_mod01_post0
+\end{verbatim}
 
 \chapter{Hello bookdown}
 
