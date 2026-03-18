@@ -1,0 +1,661 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  french,
+]{book}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\usepackage{booktabs}
+\usepackage[a4paper, top=2cm, left=2cm, right=2cm, bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+%\usepackage[french]{babel}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Machine Learning appliqué à l'actuariat},
+  pdfauthor={Mohamed Essaied Hamrita},
+  pdflang={fr},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Machine Learning appliqué à l'actuariat}
+\author{Mohamed Essaied Hamrita}
+\date{2026-03-18}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{definition}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter{Fondements et contexte}
+
+\section{Introduction au Machine Learning en Actuariat}
+
+\subsection{L'évolution du métier d'actuaire : du statisticien au data scientist}
+
+Historiquement, le métier d'actuaire s'est construit autour de l'application des méthodes statistiques et probabilistes à la gestion des risques assurantiels et financiers. Comme le rappellent \citet{denuit2019effective}, cette discipline s'est édifiée sur des piliers fondamentaux qui ont traversé les décennies.
+
+Les tables de mortalité constituent le premier de ces piliers. Véritables monuments démographiques, elles ont été patiemment construites à partir d'observations accumulées sur des décennies, permettant aux actuaires de tarifer les contrats d'assurance vie avec une précision croissante. Les modèles linéaires généralisés (GLM), introduits dans la pratique actuarielle dans les années 1990, représentent le second pilier. Ils sont devenus la pierre angulaire de la tarification non-vie, offrant un cadre théorique solide pour modéliser la fréquence et la sévérité des sinistres \citet{frees2014predictive}.
+
+Les processus stochastiques constituent le troisième pilier, mobilisés pour la modélisation des réserves et des engagements. Ils permettent de capturer la dynamique temporelle des risques et d'évaluer la solvabilité des organismes assureurs. Enfin, les simulations de Monte-Carlo se sont imposées comme l'outil incontournable pour l'évaluation des risques dans le cadre de Solvabilité II, permettant d'agréger des risques de nature différente et de quantifier les besoins en fonds propres.
+
+Cette approche traditionnelle reposait sur une hypothèse fondamentale : la réalité peut être décrite par un modèle paramétrique relativement simple, soigneusement choisi par l'actuaire sur la base de sa connaissance approfondie du métier et des mécanismes assurantiels. Cette hypothèse de parcimonie, héritée de la statistique classique, a guidé la pratique actuarielle pendant plusieurs décennies.
+
+\subsubsection{Les transformations récentes du secteur}
+
+Trois évolutions majeures ont profondément transformé le paysage de l'assurance et, avec lui, la pratique du métier d'actuaire.
+
+L'explosion du volume et de la variété des données disponibles constitue sans doute la rupture la plus significative. Comme le soulignent \citet{henckaerts2021boosting}, les actuaires ont désormais accès à des sources de données d'une richesse sans précédent. Les données télématiques, issues des boîtiers connectés installés dans les véhicules, renseignent avec une précision fine sur les comportements de conduite. Les objets connectés, tels que les montres ou les capteurs domestiques, livrent des informations sur les habitudes de vie des assurés. Les données géolocalisées atteignent une finesse inédite, permettant d'affiner l'évaluation des risques catastrophiques. Les réseaux sociaux, bien que leur utilisation reste encadrée, offrent des perspectives comportementales nouvelles.
+
+Parallèlement, les attentes réglementaires et concurrentielles se sont considérablement durcies. Solvabilité II exige une connaissance toujours plus fine des risques et une évaluation prospective de la solvabilité. IFRS 17 impose une évaluation plus précise des passifs d'assurance, nécessitant des modèles de plus en plus sophistiqués. La concurrence des insurtechs, qui proposent des offres ultra-personnalisées et des expériences client innovantes, a redéfini les standards du marché. Les assureurs traditionnels doivent désormais faire preuve d'une réactivité accrue, avec des modèles fréquemment mis à jour pour s'adapter à l'évolution des risques et des comportements.
+
+Enfin, la démocratisation des outils de calcul a levé les verrous techniques qui limitaient jusqu'alors les ambitions des modélisateurs. La puissance de calcul accessible via le cloud computing permet d'entraîner des modèles complexes sur des volumes de données massifs. La maturation de bibliothèques open source performantes, tant en R qu'en Python, met à disposition des algorithmes de pointe sans nécessiter de développements coûteux. L'émergence de langages dédiés à la data science a considérablement facilité l'expérimentation et le déploiement de méthodes innovantes.
+
+\subsubsection{Le nouveau périmètre de compétences de l'actuaire}
+
+Face à ces transformations, le périmètre de compétences de l'actuaire s'est considérablement élargi. \citet{delong2021gamma} soulignent que l'actuaire moderne doit désormais naviguer entre deux mondes : celui de la statistique classique, avec ses fondements théoriques éprouvés, et celui du machine learning, avec sa flexibilité et sa puissance prédictive.
+
+Aux compétences traditionnelles que sont la maîtrise de la statistique inférentielle, des GLM, des séries temporelles, des outils comme Excel ou VBA, et la capacité à produire des rapports écrits, s'ajoutent désormais des compétences nouvelles. La connaissance des arbres de décision, des forêts aléatoires, du gradient boosting et du deep learning devient indispensable pour exploiter pleinement le potentiel des données. La maîtrise des langages de programmation comme R et Python, ainsi que des bases de données avec SQL, est désormais attendue. L'art de la visualisation de données, pour communiquer efficacement des résultats complexes à des interlocuteurs non techniques, s'impose comme une compétence clé. Enfin, une compréhension des enjeux de data engineering et de MLOps est nécessaire pour déployer et maintenir les modèles en production dans des conditions industrielles.
+
+Cette évolution ne signifie pas pour autant un rejet des méthodes traditionnelles. Comme le soulignent \citet{denuit2019effective}, l'actuaire moderne ne remplace pas ses outils traditionnels mais les enrichit considérablement. Le GLM conserve sa pertinence dans de nombreux contextes, notamment lorsque l'interprétabilité est primordiale ou lorsque les volumes de données sont limités. Il est désormais systématiquement complété par des algorithmes capables de capturer des relations plus complexes que les approches paramétriques classiques ne peuvent appréhender.
+
+\subsection{Pourquoi le Machine Learning ? Limites des approches classiques}
+
+\subsubsection{Les GLM : forces et faiblesses}
+
+Les modèles linéaires généralisés présentent des avantages indéniables qui expliquent leur succès durable et leur position toujours centrale en actuariat. Comme le rappellent \citet{hastie2009elements}, leur interprétabilité est remarquable : chaque coefficient a une signification claire en termes d'effet marginal de la variable correspondante sur la prédiction à l'échelle de la fonction de lien. Leurs fondements statistiques solides, ancrés dans la théorie des modèles exponentiels, leur confèrent une robustesse appréciée des praticiens et des régulateurs. Leur maîtrise par l'ensemble de la profession, y compris par les autorités de contrôle, en fait un langage commun compris de tous les acteurs. Leur efficacité computationnelle permet une estimation rapide même sur des volumes de données conséquents, grâce à des algorithmes d'estimation par maximum de vraisemblance bien maîtrisés.
+
+Ces qualités ne doivent cependant pas masquer les limites qui apparaissent lorsque l'on confronte les GLM à la complexité des données et des phénomènes assurantiels contemporains.
+
+La première limite réside dans l'hypothèse de linéarité du prédicteur. Formellement, un GLM s'écrit :
+
+\begin{equation}
+g(\mathbb{E}[Y|X]) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p
+\end{equation}
+
+où (g) est la fonction de lien. Cette spécification impose que l'effet de chaque variable soit additif et linéaire à l'échelle de la fonction de lien choisie. Or la réalité assurantielle est rarement aussi simple. L'effet de l'âge sur le risque automobile n'est pas linéaire, comme en témoigne la forme en U de la courbe des sinistralités : les jeunes conducteurs présentent une sinistralité élevée qui décroît avec l'expérience, avant de remonter légèrement chez les seniors. Des interactions complexes existent entre variables, par exemple entre l'âge du conducteur et la puissance du véhicule. Un jeune conducteur au volant d'une voiture puissante présente un risque bien supérieur à la somme des risques individuels, phénomène que \citet{henckaerts2021boosting} qualifient de synergie de risque. Des effets de seuil peuvent apparaître, comme un changement brutal de comportement à partir d'un certain kilométrage annuel, que la linéarité du prédicteur ne peut capturer.
+
+La deuxième limite tient à la nécessité de spécifier manuellement les interactions. Dans un GLM, toute interaction entre variables doit être explicitement écrite dans la formule du modèle :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm(frequence \textasciitilde{} age + puissance + age:puissance, family = poisson)}
+\end{Highlighting}
+\end{Shaded}
+
+Cette spécification oblige l'actuaire à deviner quelles interactions sont pertinentes, une tâche qui devient rapidement impossible lorsque le nombre de variables augmente. Le nombre d'interactions potentielles croît en effet de manière quadratique avec la dimension du problème : avec \(p\) variables, il existe \(p(p-1)/2\) interactions d'ordre deux, sans même considérer les ordres supérieurs.
+
+La troisième limite concerne la gestion des variables à haute cardinalité. Comment traiter une variable comme le code postal, qui compte près de trente-six mille modalités en France métropolitaine ? \citet{avanzi2024machine} analysent en détail cette problématique et montrent les limites des solutions classiques. Le regroupement manuel des codes postaux en zones plus larges, par exemple au niveau des départements ou des régions, introduit une part de subjectivité et peut faire perdre une information géographique précieuse, notamment pour l'évaluation des risques naturels. L'encodage de la variable cible, qui consiste à remplacer chaque modalité par la moyenne de la variable à prédire pour cette modalité, génère un risque élevé de surapprentissage car il utilise l'information de la variable cible pour construire les prédicteurs. L'abandon pur et simple de l'information géographique fine revient à se priver d'un puissant prédicteur, notamment pour les risques dépendant de la localisation comme le vol ou les catastrophes naturelles.
+
+\subsubsection{Ce qu'apporte le Machine Learning}
+
+Le machine learning apporte des réponses à chacune de ces limitations. Comme le soulignent \citet{frees2016predictive}, les algorithmes modernes permettent de s'affranchir de nombreuses hypothèses restrictives des modèles paramétriques classiques.
+
+Les relations non linéaires, qui dans un GLM doivent être spécifiées manuellement via l'introduction de polynômes ou de splines, sont capturées automatiquement par les algorithmes comme les arbres de décision ou les réseaux de neurones. Ces méthodes apprennent directement la forme fonctionnelle à partir des données, sans nécessiter d'hypothèse a priori sur la nature des relations.
+
+Les interactions entre variables, qui nécessitaient une spécification explicite dans les GLM, sont détectées de manière autonome par les méthodes ensemblistes comme les forêts aléatoires ou le gradient boosting. Ces algorithmes explorent systématiquement l'espace des interactions potentielles et retiennent celles qui améliorent la capacité prédictive du modèle.
+
+La gestion des variables nombreuses, source de multicolinéarité et d'instabilité dans les GLM, est facilitée par les techniques de régularisation comme le lasso ou la ridge. Ces méthodes permettent de sélectionner automatiquement les variables pertinentes et de stabiliser les estimations en pénalisant les coefficients excessifs.
+
+Les données manquantes, qui imposaient une étape préalable d'imputation souvent délicate, sont gérées de manière native par certains algorithmes comme XGBoost, qui peuvent apprendre à traiter l'absence d'information comme une modalité à part entière.
+
+Les variables à haute cardinalité peuvent être traitées via des techniques d'embedding, qui apprennent une représentation compacte et informative de l'information catégorielle dans un espace vectoriel de dimension réduite \citet{avanzi2024machine}.
+
+\subsubsection{Le compromis biais-variance : illustration actuarielle}
+
+Cette puissance accrue s'accompagne cependant d'un risque majeur, celui du surapprentissage ou overfitting, qui constitue la contrepartie naturelle de la flexibilité des modèles. \citet{hastie2009elements} formalisent ce risque à travers le compromis biais-variance, concept fondamental pour comprendre les enjeux de la modélisation prédictive.
+
+L'exemple classique en assurance est celui de la tarification au code postal. Si l'on calcule le taux de sinistres pour chaque commune en divisant le nombre de sinistres observés par le nombre d'assurés, on obtiendra des taux extrêmement variables, avec des valeurs très élevées ou très faibles pour les communes comptant peu d'observations. Ces estimations sont non biaisées mais extrêmement volatiles : elles reflètent autant le bruit que le signal. Mathématiquement, pour une commune (j) avec (n\_j) assurés et \(S_j\) sinistres, l'estimateur \(\hat{\lambda}_j = S_j/n_j\) a pour variance \(\lambda_j/n_j\), qui peut être très élevée si \(n_j\) est petit.
+
+À l'inverse, une moyenne nationale unique \(\hat{\lambda} = \sum_j S_j / \sum_j n_j\) serait très stable (variance faible) mais fortement biaisée car elle ignore les spécificités locales. Le défi du machine learning est de trouver le bon équilibre entre ces deux extrêmes, et les outils de régularisation et de validation croisée permettent précisément d'ajuster ce compromis de manière optimale.
+
+\subsection{Taxonomie du Machine Learning}
+
+\subsubsection{L'apprentissage supervisé}
+
+L'apprentissage supervisé constitue la catégorie la plus naturelle pour l'actuaire car elle correspond exactement aux problèmes de prédiction qui lui sont familiers. Comme le définissent \citet{hastie2009elements}, dans ce cadre on dispose d'une variable cible \(Y\) que l'on cherche à prédire à partir d'un ensemble de variables explicatives \(X\).
+
+Lorsque la variable cible est continue, on parle de problème de régression. Cette catégorie trouve de nombreuses applications en actuariat : la prédiction de la fréquence des sinistres, où \(Y\) est un nombre entier positif modélisé classiquement par une loi de Poisson ; le montant de la sévérité, où \(Y\) est une variable positive à queue épaisse souvent modélisée par une loi Gamma ; le calcul de la prime pure, qui combine fréquence et sévérité ; ou l'estimation de la durée de vie résiduelle pour les produits d'assurance vie. Les algorithmes mobilisables incluent les GLM bien sûr, mais aussi les forêts aléatoires, le gradient boosting avec XGBoost ou LightGBM, et les réseaux de neurones.
+
+Lorsque la variable cible est catégorielle, on parle de problème de classification. Les applications sont tout aussi nombreuses : la détection de la fraude, où il s'agit de classer les sinistres en deux catégories (frauduleux ou non) ; la prédiction de la résiliation des contrats (lapse), enjeu majeur pour la gestion de la relation client ; ou la catégorisation du type de sinistre pour orienter automatiquement les dossiers vers les services compétents. La régression logistique reste une référence pour ces problèmes, mais elle est concurrencée par les arbres de décision, les forêts aléatoires, les machines à vecteurs de support et les réseaux de neurones.
+
+\subsubsection{L'apprentissage non supervisé}
+
+L'apprentissage non supervisé se distingue fondamentalement du précédent par l'absence de variable cible. L'objectif n'est plus de prédire mais de découvrir la structure sous-jacente des données, comme l'expliquent \citet{hastie2009elements}.
+
+Le clustering, ou classification non supervisée, vise à regrouper des individus similaires au sein de mêmes groupes. Cette approche est précieuse pour la segmentation client, où l'on cherche à identifier des profils types d'assurés partageant des caractéristiques communes en termes de comportement de risque ou de consommation de produits. Elle est également utile pour la construction de profils de risque homogènes, permettant d'affiner l'évaluation des risques sans recourir à une modélisation supervisée. Les algorithmes les plus utilisés sont les k-means, la classification ascendante hiérarchique, et DBSCAN pour des structures plus complexes.
+
+La réduction de dimension a pour objectif de synthétiser l'information contenue dans de nombreuses variables en un nombre plus restreint de facteurs. L'analyse en composantes principales en est l'illustration classique, mais des méthodes plus sophistiquées comme les auto-encodeurs permettent d'apprendre des représentations compactes, notamment pour créer des embeddings de variables catégorielles à haute cardinalité \citet{delong2021gamma}.
+
+La détection d'anomalies vise à identifier les observations qui s'écartent significativement du comportement habituel. Cette approche a des applications évidentes en détection de fraude, où les sinistres frauduleux présentent souvent des caractéristiques atypiques, ou pour repérer des erreurs de saisie dans les bases de données. L'Isolation Forest et les one-class SVM sont des algorithmes spécialisés pour cette tâche.
+
+\subsubsection{L'apprentissage par renforcement}
+
+L'apprentissage par renforcement constitue une troisième famille, moins directement applicable en actuariat mais dont les principes commencent à pénétrer certains domaines comme la gestion d'actifs ou l'optimisation de stratégies de souscription. Dans ce paradigme, un agent apprend par essais et erreurs en interagissant avec son environnement, recevant des récompenses ou des pénalités selon la qualité de ses actions. Cette approche est particulièrement adaptée aux problèmes séquentiels où les décisions prises aujourd'hui influencent les états futurs, comme la fixation dynamique des primes ou la gestion optimale de portefeuille.
+
+\section{Applications concrètes et manipulations R}
+
+\subsection{Introduction aux manipulations R}
+
+Avant de commencer toute analyse, nous devons configurer notre environnement \texttt{R} et installer les librairies nécessaires. L'écosystème \texttt{tidymodels} \citet{khun2022tidy} fournit un cadre cohérent pour toutes les étapes d'un projet de machine learning.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\# Installation des librairies necessaires}
+\NormalTok{install.packages("tidymodels")             \# Meta{-}package pour la modelisation}
+\NormalTok{install.packages(c("tidyverse", "dplyr")   \# Manipulation et visualisation}
+\NormalTok{install.packages(\textquotesingle{}pak\textquotesingle{})                    \# installation des packages spécifiques}
+\NormalTok{pak::pak("dutangc/CASdatasets")            \# Jeux de donnees actuariels}
+\NormalTok{install.packages("DALEX")                  \# Interpretabilite des modeles}
+\NormalTok{install.packages("shapviz")                \# Valeurs SHAP}
+\NormalTok{install.packages("ranger")                 \# Forets aleatoires rapides}
+\NormalTok{install.packages("xgboost")                \# Gradient boosting}
+\NormalTok{install.packages("keras")                  \# Deep learning}
+\NormalTok{install.packages("recipes")                \# Pretraitement des donnees}
+\NormalTok{install.packages("kableExtra")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Chargement des librairies}
+\FunctionTok{suppressPackageStartupMessages}\NormalTok{(\{}
+\FunctionTok{library}\NormalTok{(tidymodels)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(CASdatasets)}
+\FunctionTok{library}\NormalTok{(DALEX)}
+\FunctionTok{library}\NormalTok{(shapviz)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Présentation du jeu de données : freMTPL2freq}
+
+Pour illustrer nos manipulations, nous utilisons le jeu de données freMTPL2freq de la librairie CASdatasets. Ce jeu de données, rendu célèbre par les travaux de \citet{denuit2019effective}, contient des informations sur des contrats d'assurance automobile français.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Chargement et exploration des donnees}
+\FunctionTok{data}\NormalTok{(}\StringTok{"freMTPL2freq"}\NormalTok{)}
+\NormalTok{donnees }\OtherTok{\textless{}{-}}\NormalTok{ freMTPL2freq}
+
+\CommentTok{\# Structure des donnees}
+\FunctionTok{str}\NormalTok{(donnees)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   677991 obs. of  12 variables:
+ $ IDpol     : Factor w/ 677991 levels "1","3","5","10",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ ClaimNb   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ Exposure  : num  0.1 0.77 0.75 0.09 0.84 0.52 0.45 0.27 0.71 0.15 ...
+ $ VehPower  : int  5 5 6 7 7 6 6 7 7 7 ...
+ $ VehAge    : int  0 0 2 0 0 2 2 0 0 0 ...
+ $ DrivAge   : int  55 55 52 46 46 38 38 33 33 41 ...
+ $ BonusMalus: int  50 50 50 50 50 50 50 68 68 50 ...
+ $ VehBrand  : Factor w/ 11 levels "B1","B10","B11",..: 4 4 4 4 4 4 4 4 4 4 ...
+ $ VehGas    : Factor w/ 2 levels "Diesel","Regular": 2 2 1 1 1 2 2 1 1 1 ...
+ $ Area      : Factor w/ 6 levels "A","B","C","D",..: 4 4 2 2 2 5 5 3 3 2 ...
+ $ Density   : int  1217 1217 54 76 76 3003 3003 137 137 60 ...
+ $ Region    : Factor w/ 22 levels "Alsace","Aquitaine",..: 22 22 19 2 2 17 17 13 13 18 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Apercu des premieres lignes}
+\FunctionTok{head}\NormalTok{(donnees) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{bootstrap\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hover"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}{l|r|r|r|r|r|r|l|l|l|r|l}
+\hline
+IDpol & ClaimNb & Exposure & VehPower & VehAge & DrivAge & BonusMalus & VehBrand & VehGas & Area & Density & Region\\
+\hline
+1 & 0 & 0.10 & 5 & 0 & 55 & 50 & B12 & Regular & D & 1217 & Rhone-Alpes\\
+\hline
+3 & 0 & 0.77 & 5 & 0 & 55 & 50 & B12 & Regular & D & 1217 & Rhone-Alpes\\
+\hline
+5 & 0 & 0.75 & 6 & 2 & 52 & 50 & B12 & Diesel & B & 54 & Picardie\\
+\hline
+10 & 0 & 0.09 & 7 & 0 & 46 & 50 & B12 & Diesel & B & 76 & Aquitaine\\
+\hline
+11 & 0 & 0.84 & 7 & 0 & 46 & 50 & B12 & Diesel & B & 76 & Aquitaine\\
+\hline
+13 & 0 & 0.52 & 6 & 2 & 38 & 50 & B12 & Regular & E & 3003 & Nord-Pas-de-Calais\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Statistiques descriptives}
+\FunctionTok{summary}\NormalTok{(donnees)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      IDpol           ClaimNb          Exposure           VehPower     
+##  1      :     1   Min.   : 0.000   Min.   :0.002732   Min.   : 4.000  
+##  3      :     1   1st Qu.: 0.000   1st Qu.:0.180000   1st Qu.: 5.000  
+##  5      :     1   Median : 0.000   Median :0.490000   Median : 6.000  
+##  10     :     1   Mean   : 0.039   Mean   :0.528743   Mean   : 6.455  
+##  11     :     1   3rd Qu.: 0.000   3rd Qu.:0.990000   3rd Qu.: 7.000  
+##  13     :     1   Max.   :16.000   Max.   :2.010000   Max.   :15.000  
+##  (Other):677985                                                       
+##      VehAge           DrivAge        BonusMalus        VehBrand     
+##  Min.   :  0.000   Min.   : 18.0   Min.   : 50.00   B12    :166022  
+##  1st Qu.:  2.000   1st Qu.: 34.0   1st Qu.: 50.00   B1     :162730  
+##  Median :  6.000   Median : 44.0   Median : 50.00   B2     :159854  
+##  Mean   :  7.044   Mean   : 45.5   Mean   : 59.76   B3     : 53393  
+##  3rd Qu.: 11.000   3rd Qu.: 55.0   3rd Qu.: 64.00   B5     : 34752  
+##  Max.   :100.000   Max.   :100.0   Max.   :230.00   B6     : 28545  
+##                                                     (Other): 72695  
+##      VehGas       Area          Density     
+##  Diesel :332128   A:103952   Min.   :    1  
+##  Regular:345863   B: 75457   1st Qu.:   92  
+##                   C:191874   Median :  393  
+##                   D:151592   Mean   : 1792  
+##                   E:137163   3rd Qu.: 1658  
+##                   F: 17953   Max.   :27000  
+##                                             
+##                          Region      
+##  Centre                     :160595  
+##  Rhone-Alpes                : 84748  
+##  Provence-Alpes-Cotes-D'Azur: 79315  
+##  Ile-de-France              : 69789  
+##  Bretagne                   : 42120  
+##  Pays-de-la-Loire           : 38747  
+##  (Other)                    :202677
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution de la variable cible (frequence des sinistres)}
+\NormalTok{donnees }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ ClaimNb)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution du nombre de sinistres"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Nombre de sinistres"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Fréquence"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{_main_files/figure-latex/unnamed-chunk-7-1.pdf}}
+
+Le jeu de données contient les variables suivantes :
+
+\begin{itemize}
+\item
+  \texttt{PolicyID} : identifiant unique du contrat
+\item
+  \texttt{ClaimNb} : nombre de sinistres sur la période (variable cible)
+\item
+  \texttt{Exposure} : durée d'exposition au risque (en années)
+\item
+  \texttt{Power} : puissance fiscale du véhicule (catégorielle)
+\item
+  \texttt{CarAge} : âge du véhicule (en années)
+\item
+  \texttt{DriverAge} : âge du conducteur principal
+\item
+  \texttt{Density} : densité de population dans la commune (habitants/km²)
+\item
+  \texttt{Region} : région (code)
+\item
+  \texttt{BonusMalus} : coefficient bonus-malus
+\end{itemize}
+
+\subsection{Application 1 : Tarification Non-Vie avec un GLM régularisé}
+
+\subsubsection*{Objectif métier}
+\addcontentsline{toc}{subsubsection}{Objectif métier}
+
+Notre objectif est de construire un modèle de tarification pour prédire la fréquence des sinistres. En actuariat, on modélise classiquement le nombre de sinistres \(Y_i\) par une loi de Poisson de paramètre \(\lambda_i \times \text{exposition}_i\), où \(\lambda_i\) est le taux de sinistres attendu. Le lien canonique est le logarithme :
+
+\[
+\log(\lambda_i)=\beta_0+\beta_1 X_{1i}+\beta_2X_{2i}+\ldots+\beta_pX_{pi}
+\]
+\#\#\#\# Préparation des données et split entraînement/test \{-\}
+
+La première étape consiste à diviser nos données en un ensemble d'entraînement (80\%) et un ensemble de test (20\%). Cette séparation est cruciale pour évaluer la capacité de généralisation de notre modèle.
+
+\chapter{Hello bookdown}
+
+All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+
+\section{A section}
+
+All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+
+\subsection*{An unnumbered section}
+\addcontentsline{toc}{subsection}{An unnumbered section}
+
+Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
+
+\chapter{Cross-references}\label{cross}
+
+Cross-references make it easier for your readers to find and link to elements in your book.
+
+\section{Chapters and sub-chapters}
+
+There are two steps to cross-reference any heading:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
+  \item
+    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
+  \end{itemize}
+\item
+  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If you prefer text as the link instead of a numbered reference use: \hyperref[cross]{any text you want can go here}.
+  \end{itemize}
+\end{enumerate}
+
+\section{Captioned figures and tables}
+
+Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
+
+See Figure \ref{fig:nice-fig}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth,alt={Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.}]{_main_files/figure-latex/nice-fig-1} 
+
+}
+
+\caption{Here is a nice figure!}\label{fig:nice-fig}
+\end{figure}
+
+Don't miss Table \ref{tab:nice-tab}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{booktabs =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:nice-tab}Here is a nice table!}
+\centering
+\begin{tabular}[t]{rr}
+\toprule
+temperature & pressure\\
+\midrule
+0 & 0.0002\\
+20 & 0.0012\\
+40 & 0.0060\\
+60 & 0.0300\\
+80 & 0.0900\\
+\addlinespace
+100 & 0.2700\\
+120 & 0.7500\\
+140 & 1.8500\\
+160 & 4.2000\\
+180 & 8.8000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\chapter{Parts}
+
+You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
+
+Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+
+Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+
+Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
+
+\chapter{Footnotes and citations}
+
+\section{Footnotes}
+
+Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+
+\section{Citations}
+
+Reference items in your bibliography file(s) using \texttt{@key}.
+
+For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
+Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+
+\chapter{Blocks}
+
+\section{Equations}
+
+Here is an equation.
+
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  \label{eq:binom}
+\end{equation}
+
+You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
+
+\section{Theorems and proofs}
+
+Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
+
+\begin{theorem}
+\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
+and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
+\[a^2 + b^2 = c^2\]
+\end{theorem}
+
+Read more here \url{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}.
+
+\section{Callout blocks}
+
+The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
+
+\chapter{Sharing your book}
+
+\section{Publishing}
+
+HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
+
+\section{404 pages}
+
+By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
+
+\section{Metadata for sharing}
+
+Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
+
+This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
+
+Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
+
+Read more about the features of this output format here:
+
+https://pkgs.rstudio.com/bookdown/reference/gitbook.html
+
+Or use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
+\end{Highlighting}
+\end{Shaded}
+
+
+\bibliography{book.bib,packages.bib}
+
+\end{document}

@@ -3,3 +3,4 @@ language:
   ui:
     chapter_name: "Chapire"
     appendix_name: "Appendice "
+output_dir: "docs"
